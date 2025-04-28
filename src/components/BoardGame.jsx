@@ -31,10 +31,12 @@ const BoardGame = ({
           </div>
         ) : (
           <>
-            {points.map((point) => (
-              <div
-                key={point.id}
-                className={`absolute flex items-center justify-center cursor-pointer rounded-full border-2
+            {[...points]
+              .sort((a, b) => a.id - b.id)
+              .map((point, index) => (
+                <div
+                  key={point.id}
+                  className={`absolute flex items-center justify-center cursor-pointer rounded-full border-2
                             ${point.id === nextNumber ? "bg-white" : "bg-white"}
                             ${
                               point.id === hintPoint
@@ -47,37 +49,38 @@ const BoardGame = ({
                                 : "opacity-100"
                             }
                             hover:bg-gray-100`}
-                style={{
-                  left: `${Math.max(
-                    0,
-                    Math.min(
-                      point.x - halfSize,
-                      gameBoardRef.current?.clientWidth - pointSize || 0
-                    )
-                  )}px`,
-                  top: `${Math.max(
-                    0,
-                    Math.min(
-                      point.y - halfSize,
-                      gameBoardRef.current?.clientHeight - pointSize || 0
-                    )
-                  )}px`,
-                  width: `${pointSize}px`,
-                  height: `${pointSize}px`,
-                  fontSize: "24px",
-                  // zIndex: point.id,
-                  zIndex: points.length - point.id + 1, 
-                  backgroundColor: clickedPoints.includes(point.id)
-                    ? "#00FF00"
-                    : point.id === hintPoint
-                    ? "#FEF08A"
-                    : "#FFFFFF",
-                }}
-                onClick={() => handlePointClick(point.id)}
-              >
-                {point.id}
-              </div>
-            ))}
+                  style={{
+                    left: `${Math.max(
+                      0,
+                      Math.min(
+                        point.x - halfSize,
+                        gameBoardRef.current?.clientWidth - pointSize || 0
+                      )
+                    )}px`,
+                    top: `${Math.max(
+                      0,
+                      Math.min(
+                        point.y - halfSize,
+                        gameBoardRef.current?.clientHeight - pointSize || 0
+                      )
+                    )}px`,
+                    width: `${pointSize}px`,
+                    height: `${pointSize}px`,
+                    fontSize: "24px",
+                    // zIndex: point.id,
+                    // zIndex: points.length - point.id + 1,
+                    zIndex: points.length - index,
+                    backgroundColor: clickedPoints.includes(point.id)
+                      ? "#00FF00"
+                      : point.id === hintPoint
+                      ? "#FEF08A"
+                      : "#FFFFFF",
+                  }}
+                  onClick={() => handlePointClick(point.id)}
+                >
+                  {point.id}
+                </div>
+              ))}
           </>
         )}
       </div>
