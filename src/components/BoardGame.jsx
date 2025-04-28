@@ -31,7 +31,7 @@ const BoardGame = ({
           </div>
         ) : (
           <>
-            {points.map((point,index) => (
+            {points.map((point) => (
               <div
                 key={point.id}
                 className={`absolute flex items-center justify-center cursor-pointer rounded-full border-2
@@ -66,7 +66,7 @@ const BoardGame = ({
                   height: `${pointSize}px`,
                   fontSize: "24px",
                   // zIndex: point.id,
-                  zIndex: points.length - index,
+                  zIndex: points.length - point.id + 1, 
                   backgroundColor: clickedPoints.includes(point.id)
                     ? "#00FF00"
                     : point.id === hintPoint
