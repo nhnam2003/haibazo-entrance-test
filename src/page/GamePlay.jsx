@@ -63,30 +63,28 @@ function GamePlay() {
     if (!gameStarted || allCleared || gameOver) return;
 
     if (clickedId === nextNumber) {
-      setClickedPoints((prev) => [...prev, clickedId]);
-      setTimeout(() => {
-        setPoints((prevPoints) =>
-          prevPoints.filter((point) => point.id !== clickedId)
-        );
-        setNextNumber((prevNext) => prevNext + 1);
-        setHintPoint(null);
+      // Tạo bản sao mới của points và chỉ loại bỏ điểm có ID bằng nextNumber
+      const updatedPoints = points.filter((point) => point.id !== nextNumber);
 
-        if (nextNumber === pointCount) {
-          setAllCleared(true);
-          if (timer) clearInterval(timer);
-        }
-      }, 300);
+      setPoints(updatedPoints);
+      setClickedPoints((prev) => [...prev, clickedId]);
+      setNextNumber((prev) => prev + 1);
+
+      // Kiểm tra nếu đã chọn hết
+      if (updatedPoints.length === 0) {
+        setAllCleared(true);
+        if (timer) clearInterval(timer);
+      }
     } else {
       setGameOver(true);
       if (timer) clearInterval(timer);
     }
   };
-
   const handleHintClick = () => {
     if (!gameStarted || allCleared || gameOver) return;
     const nextPointToClick = points.find((point) => point.id === nextNumber);
     if (nextPointToClick) {
-      setHintPoint(nextPointToClick.id);
+      setHintPoint(nextPointToClick.id); // Gợi ý điểm tiếp theo cần chọn
     }
   };
 
@@ -103,6 +101,7 @@ function GamePlay() {
       clearInterval(timer);
     }
   };
+
   const handlePointCountChange = (newPointCount) => {
     const num = Math.abs(parseInt(newPointCount) || 1);
     const finalValue = Math.max(1, num);
@@ -122,7 +121,7 @@ function GamePlay() {
     <div className="flex justify-center items-center bg-gray-100 ">
       <div className="bg-white p-6 rounded-lg shadow-md w-4/5 max-w-2xl">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-2xl font-bold mb-4">LET'S PLAY</h1>
+          <h1 className="text-2xl font-bold mb-4">LET'S PLAY !</h1>
           <GameInfo
             pointCount={pointCount}
             time={time}

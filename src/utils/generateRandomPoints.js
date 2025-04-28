@@ -1,11 +1,14 @@
+// utils/generateRandomPoints.js
 export const generateRandomPoints = (count = 10, boardWidth, boardHeight) => {
   const points = [];
   const pointSize = 60;
   const halfSize = pointSize / 2;
-  // const margin = 10;
+  const margin = 20; // Margin to avoid edges
 
+  // Create array of IDs from 1 to count
   const ids = Array.from({ length: count }, (_, i) => i + 1);
-
+  
+  // Shuffle IDs randomly
   const shuffledIds = [...ids].sort(() => Math.random() - 0.5);
 
   for (const id of shuffledIds) {
@@ -14,21 +17,27 @@ export const generateRandomPoints = (count = 10, boardWidth, boardHeight) => {
     let validPosition = false;
 
     do {
-      x = Math.floor(Math.random() * (boardWidth - pointSize)) + halfSize;
-      y = Math.floor(Math.random() * (boardHeight - pointSize)) + halfSize;
+      // Calculate position with margin
+      x = Math.floor(
+        margin + Math.random() * (boardWidth - pointSize - 2 * margin)
+      ) + halfSize;
+      y = Math.floor(
+        margin + Math.random() * (boardHeight - pointSize - 2 * margin)
+      ) + halfSize;
       attempts++;
 
+      // Check for overlap
       let overlap = false;
       for (const point of points) {
         const distance = Math.sqrt(
           Math.pow(point.x - x, 2) + Math.pow(point.y - y, 2)
         );
-        if (distance < pointSize * 0.8) {
+        if (distance < pointSize) {
           overlap = true;
           break;
         }
       }
-
+      
       validPosition = attempts > 20 ? true : !overlap;
     } while (!validPosition && attempts < 50);
 
@@ -37,9 +46,9 @@ export const generateRandomPoints = (count = 10, boardWidth, boardHeight) => {
       x,
       y,
       size: pointSize,
-      zIndex: id,
+      zIndex: count - id + 1
     });
   }
 
-  return points.sort((a, b) => a.zIndex - b.zIndex);
+  return points;
 };
