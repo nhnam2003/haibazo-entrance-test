@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../App.css";
 const BoardGame = ({
   points,
   nextNumber,
@@ -31,13 +31,22 @@ const BoardGame = ({
           </div>
         ) : (
           <>
-            {points.map((point) => (
+            {points.map((point,index) => (
               <div
                 key={point.id}
-                className={`absolute flex items-center justify-center cursor-pointer
-                ${point.id === nextNumber ? "bg-white" : "bg-white"}
-                ${point.id === hintPoint ? "scale-110 bg-yellow-200" : ""}
-                hover:bg-gray-100`}
+                className={`absolute flex items-center justify-center cursor-pointer rounded-full border-2
+                            ${point.id === nextNumber ? "bg-white" : "bg-white"}
+                            ${
+                              point.id === hintPoint
+                                ? "scale-110 bg-yellow-200"
+                                : ""
+                            }
+                            ${
+                              clickedPoints.includes(point.id)
+                                ? "opacity-0 transition-opacity duration-500 ease-out"
+                                : "opacity-100"
+                            }
+                            hover:bg-gray-100`}
                 style={{
                   left: `${Math.max(
                     0,
@@ -56,11 +65,8 @@ const BoardGame = ({
                   width: `${pointSize}px`,
                   height: `${pointSize}px`,
                   fontSize: "24px",
-                  borderRadius: "50%",
-                  borderWidth: "2px",
-                  transition: "opacity 1.5s ease, background-color 0.5s ease",
-                  opacity: clickedPoints.includes(point.id) ? "0" : "1",
-                  zIndex: point.id, // Changed to use point.id directly
+                  // zIndex: point.id,
+                  zIndex: points.length - index,
                   backgroundColor: clickedPoints.includes(point.id)
                     ? "#00FF00"
                     : point.id === hintPoint

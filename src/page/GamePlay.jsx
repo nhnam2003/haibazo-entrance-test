@@ -59,27 +59,28 @@ function GamePlay() {
       setTimer(newTimer);
     }
   };
+
   const handlePointClick = (clickedId) => {
     if (!gameStarted || allCleared || gameOver) return;
 
     if (clickedId === nextNumber) {
-      // Tạo bản sao mới của points và chỉ loại bỏ điểm có ID bằng nextNumber
-      const updatedPoints = points.filter((point) => point.id !== nextNumber);
+      setClickedPoints((prev) => [...prev, clickedId]); 
+      setTimeout(() => {
+        setPoints((prev) => prev.filter((point) => point.id !== clickedId));
+        setNextNumber((prev) => prev + 1);
 
-      setPoints(updatedPoints);
-      setClickedPoints((prev) => [...prev, clickedId]);
-      setNextNumber((prev) => prev + 1);
-
-      // Kiểm tra nếu đã chọn hết
-      if (updatedPoints.length === 0) {
-        setAllCleared(true);
-        if (timer) clearInterval(timer);
-      }
+        if (points.length === 1) {
+          // Nếu là điểm cuối cùng
+          setAllCleared(true);
+          if (timer) clearInterval(timer);
+        }
+      }, 200); 
     } else {
       setGameOver(true);
       if (timer) clearInterval(timer);
     }
   };
+
   const handleHintClick = () => {
     if (!gameStarted || allCleared || gameOver) return;
     const nextPointToClick = points.find((point) => point.id === nextNumber);
