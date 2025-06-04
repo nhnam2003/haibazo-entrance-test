@@ -251,7 +251,7 @@ function GamePlay() {
             hintPoint={hintPoint}
             clickedTimers={clickedTimers}
           />
-          {showNextPointIndicator && !allCleared &&  (
+          {showNextPointIndicator && !allCleared && !gameOver && gameStarted &&  (
             <div className="mt-4 text-lg font-semibold">
               Next point: {nextNumber}
               {autoPlaying && (

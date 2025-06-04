@@ -11,19 +11,13 @@ This project is a reaction-time and memory game where random numbered points are
 ### Main Game Interface
 
 <p align="center">
-  <img src="https://res.cloudinary.com/dab8vbas9/image/upload/v1745858566/image1_odvnqb.png" width="400" alt="Main game screen showing numbered dots">
-</p>
-
-### Using Hint Feature
-
-<p align="center">
-  <img src="https://res.cloudinary.com/dab8vbas9/image/upload/v1745858567/hintImage_mpt2he.png" width="400" alt="Game screen with next number highlighted by hint system">
+  <img src="https://res.cloudinary.com/dab8vbas9/image/upload/v1749031609/fix_1_sm72q7.png" width="400" alt="Main game screen showing numbered dots">
 </p>
 
 ### Victory Screen
 
 <p align="center">
-  <img src="https://res.cloudinary.com/dab8vbas9/image/upload/v1745858567/winGame_xtoweb.png" width="400" alt="Winning screen showing completion message">
+  <img src="https://res.cloudinary.com/dab8vbas9/image/upload/v1749031649/fix_2_xywhfu.png" width="400" alt="Winning screen showing completion message">
 </p>
 
 ### Game Over Screen
@@ -117,5 +111,5 @@ habazo-entrancetest/
 2. Click "Start Game"
 3. Find and click on the number 1
 4. Continue clicking numbers in ascending order (2, 3, 4, etc.)
-5. If you get stuck, use the "AutoPlay" button 
+5. If you get stuck, use the "AutoPlay" button
 6. Try to clear all numbers as quickly as possible!
