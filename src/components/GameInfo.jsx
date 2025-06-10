@@ -9,7 +9,7 @@ const GameInfo = ({
     <div className="m-4 w-3/5">
       <div className="flex items-center justify-start mb-4">
         <label className="text-sm font-medium mr-5">Number of Points:</label>
-        {gameStarted ? (
+        {!gameStarted || !gameOver ? (
           <input
             type="number"
             className="border rounded p-1 w-20 text-center"
