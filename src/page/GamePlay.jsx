@@ -201,6 +201,10 @@ function GamePlay() {
   };
 
   const handlePointCountChange = (newPointCount) => {
+    if (newPointCount === "") {
+      setPointCount("");
+      return;
+    }
     const num = Math.abs(parseInt(newPointCount) || 1);
     const finalValue = Math.max(1, num);
     if (finalValue > 1000) {
@@ -251,7 +255,7 @@ function GamePlay() {
             hintPoint={hintPoint}
             clickedTimers={clickedTimers}
           />
-          {showNextPointIndicator && !allCleared && !gameOver && gameStarted &&  (
+          {showNextPointIndicator && !allCleared && !gameOver && gameStarted && (
             <div className="mt-4 text-lg font-semibold">
               Next point: {nextNumber}
               {autoPlaying && (
