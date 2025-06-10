@@ -50,7 +50,7 @@ function GamePlay() {
 
     autoPlayTimeoutRef.current = setTimeout(() => {
       handlePointClick(next.id);
-    }, 1000);
+    }, 800);
 
     return () => {
       if (autoPlayTimeoutRef.current) {
